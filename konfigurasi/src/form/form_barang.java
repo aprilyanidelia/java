@@ -238,9 +238,15 @@ public void tampildata(){
     private void jTextField_satuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_satuanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_satuanActionPerformed
-
+    private void Clear(){
+        jTextField_kode_barang.setText(null);
+        jTextField_nama_barang.setText(null);
+        jTextField_harga.setText(null);
+        jTextField_satuan.setText(null);
+        jTextField_stok.setText(null);
+    }
     private void jButton_baruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_baruActionPerformed
-        // TODO add your handling code here:
+        Clear();
     }//GEN-LAST:event_jButton_baruActionPerformed
 
     private void jButton_simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_simpanActionPerformed
@@ -292,7 +298,27 @@ public void tampildata(){
     }//GEN-LAST:event_jButton_editActionPerformed
 
     private void jButton_hapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_hapusActionPerformed
-        // TODO add your handling code here:
+       Connection conn = koneksi.getConnection();
+       int confirm=JOptionPane.showConfirmDialog(null,"apakah anda yakin ingin menghapus data tersebut?","konfirmasi",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+       if (confirm == 0){
+            try{
+               java.sql.PreparedStatement stmt = conn.prepareStatement("delete from barang where kode_barang='" + jTextField_kode_barang.getText()+"'");
+               
+               stmt.executeUpdate();
+               
+               JOptionPane.showMessageDialog(null,"data berhasil dihapus","pesan",JOptionPane.INFORMATION_MESSAGE);
+               tampildata();
+               jTextField_kode_barang.setText("");
+               jTextField_nama_barang.setText("");
+               jTextField_harga.setText("");
+               jTextField_satuan.setText("");
+               jTextField_stok.setText("");
+               jTextField_kode_barang.requestFocus();
+           }catch
+           (SQLException e){
+               JOptionPane.showMessageDialog(null, "data gagal dihapus"+e.getMessage(),"pesan",JOptionPane.ERROR_MESSAGE);
+           }
+       }
     }//GEN-LAST:event_jButton_hapusActionPerformed
 
     private void jTable_barangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_barangMouseClicked
