@@ -1,7 +1,7 @@
 
 package table;
-
 import java.sql.*;
+
 public class table {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/pelajar";
